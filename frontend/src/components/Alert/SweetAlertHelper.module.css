@@ -1,0 +1,5 @@
+/* SweetAlertHelper.module.css */
+.sweetalert_small_font .swal2-title,
+.sweetalert_small_font .swal2-content {
+  font-size: 14px; /* Adjust the font size as needed */
+}

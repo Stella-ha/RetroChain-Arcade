@@ -1,8 +1,10 @@
-fastapi==0.110.1
-uvicorn[standard]==0.29.0
-py-algorand-sdk==2.0.0
-pyteal==0.27.0
-ipfshttpclient==0.8.0a2
-python-multipart==0.0.9
-pydantic==2.6.4
+fastapi
+uvicorn
+requests
+python-dotenv
+python-multipart
+pydantic
+pydantic-settings
 python-dotenv==1.0.1
+mysql-connector-python
+passlib[bcrypt]==4.0.1

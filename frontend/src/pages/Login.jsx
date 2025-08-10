@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import Footer from '../components/Footer';
 import { useAuth } from '../context/authContext';
+import SweetAlertHelper from "../components/Alert/SweetAlertHelper";
+import axios from "axios";
+import { API_BASE_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const { login } = useAuth();
+  const sweetAlertHelper = SweetAlertHelper();
+  const navigate = useNavigate();
 
   const handleWalletLogin = () => {
     console.log('Wallet login triggered');
@@ -12,11 +18,17 @@ export default function Login() {
     login();
   };
 
-  const handleEmailLogin = () => {
-    console.log('Email login:', formData);
-    // TODO: Call backend API for email/password login
-    login();
-  };
+const handleEmailLogin = async () => {
+  try {
+    const res = await axios.post(`${API_BASE_URL}/login`, formData);
+    if (res.status === 200) {
+      login(); // update frontend auth state
+      navigate("/dashboard");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,7 +60,7 @@ export default function Login() {
             <input
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="Email/Username"
               onChange={handleChange}
               className="w-full mb-4 p-3 bg-gray-700 text-white placeholder-gray-400 rounded"
               required

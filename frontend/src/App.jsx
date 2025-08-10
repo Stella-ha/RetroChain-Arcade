@@ -1,16 +1,13 @@
 import React from 'react';
-import AppRoutes from './routes/AppRoutes';
-import ProtectedRoutes from './routes/ProtectedRoutes';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from "./components/Header";
+import MainRoutes from "./routes/MainRoute";
 
 export default function App() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-950 text-white">
       <Header />
       <main className="flex-1">
-        <AppRoutes/>
-        <ProtectedRoutes/>
+          <MainRoutes />
       </main>
       {/* <Footer /> */}
     </div>
