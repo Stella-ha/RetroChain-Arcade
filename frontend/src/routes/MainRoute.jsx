@@ -11,6 +11,9 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 
+import PacmanLoading from "../pages/pacman/pacmanLoading";
+import PacmanGame from "../pages/pacman/PacmanGame";
+
 export default function MainRoutes() {
   return (
     <Routes>
@@ -28,6 +31,8 @@ export default function MainRoutes() {
           </PrivateRoute>
         }
       />
+      <Route path="/games/pacman" element={<PacmanLoading />} />
+      <Route path="/pacman" element={<PacmanGame />} />
     </Routes>
   );
 }

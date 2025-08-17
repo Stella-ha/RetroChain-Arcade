@@ -1,0 +1,99 @@
+/* set entire screen for animation */
+.loading-sequence {
+  position: relative;
+  width: 100%;
+  height: 100px;
+}
+
+/* Pac-Man (yellow circle with mouth) */
+.pacman {
+  position: absolute;
+  top: 40px;
+  left: -20%;
+  width: 40px;
+  height: 40px;
+  background: yellow;
+  border-radius: 50%;
+  clip-path: polygon(100% 0%, 50% 50%, 100% 100%, 0% 100%, 0% 0%);
+  animation: pacman-run 20s linear forwards, pacman-chomp 0.3s infinite;
+  z-index: 2;
+}
+
+/* Ghost body */
+.ghost {
+  position: absolute;
+  top: 40px;
+  left: -40%;
+  width: 40px;
+  height: 40px;
+  background: red;
+  border-radius: 20px 20px 0 0;
+  animation: ghost-run 20s linear forwards;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* Ghost eyes */
+.ghost .eye {
+  content: "";
+  position: absolute;
+  top: 10px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+}
+
+.ghost .eye:first-child {
+  left: 8px;
+}
+ 
+.ghost .eye:last-child {
+  right: 8px;
+}
+
+.ghost .eye::after{
+  content:"";
+  position:absolute;
+  top:3px;            
+  left: var(--pupil-left, 4px);
+  width:6px; height:6px;
+  background:#3aa7ff;          
+  border-radius:50%;
+}
+
+/* --- Animations --- */
+@keyframes pacman-chomp {
+  0%   { clip-path: polygon(100% 0%, 50% 50%, 100% 100%, 0% 100%, 0% 0%); } /* mouth open */
+  50%  { clip-path: circle(50%); } /* mouth closed (full circle) */
+  100% { clip-path: polygon(100% 0%, 50% 50%, 100% 100%, 0% 100%, 0% 0%); } /* open again */
+}
+
+@keyframes pacman-run {
+  /* Round 1 */
+  0%   { left: -20%; transform: scaleX(1); }
+  25%  { left: 120%; transform: scaleX(1); }
+
+  /* Between Rounds → reduced to 0.5s wait */
+  27.5% { left: 120%; transform: scaleX(-1); }
+
+  /* Round 2: Pac-Man enters AFTER ghost (1s delay), moves slower */
+  36%   { left: 120%; transform: scaleX(-1); } /* 1s delay after ghost */
+  75%   { left: -20%; transform: scaleX(-1); } /* 8s to return (slower) */
+  100%  { left: -20%; transform: scaleX(-1); }
+}
+
+@keyframes ghost-run {
+  /* Round 1 */
+  0%   { left: -40%; background: red; transform: scaleX(1); --pupil-left: 5px; }
+  5%   { left: -40%; background: red; transform: scaleX(1); --pupil-left: 5px; }
+  25%  { left: 120%; background: red; transform: scaleX(1); --pupil-left: 5px; }
+
+  /* Between Rounds → reduced to 0.5s wait */
+  25.5% { left: 120%; background: blue; transform: scaleX(-1); --pupil-left: 1px; }
+
+  /* Round 2: Ghost starts moving first */
+  35%   { left: 120%; background: blue; transform: scaleX(-1); --pupil-left: 1px; }
+  70%   { left: -20%; background: blue; transform: scaleX(-1); --pupil-left: 1px; }
+  100%  { left: -20%; background: blue; transform: scaleX(-1); --pupil-left: 1px; }
+}

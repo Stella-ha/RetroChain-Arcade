@@ -21,7 +21,7 @@ export default function Dashboard() {
       id: 3,
       title: "PinBall",
       description: "Classic pinball arcade fun!",
-      image: "/images/pinball.png",
+      image: "src/assets/gameCard/pinball-logo.jpg",
     },
     {
       id: 4,
