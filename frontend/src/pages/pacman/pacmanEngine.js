@@ -9,14 +9,6 @@ export function initPacman(ctx, canvas) {
     dy: 0,
   };
 
-  const map = [
-    ["1", "-", "-", "-", "-", "-", "2"],
-    ["|", " ", "b", "b", "b", " ", "|"],
-    ["|", "b", "1", "-", "2", "b", "|"],
-    ["|", "b", "|", " ", "|", "b", "|"],
-    ["4", "-", "3", "b", "4", "-", "3"],
-  ];
-
   function drawMap(ctx, canvas, blockSize) {
     map.forEach((row, rowIndex) => {
       row.forEach((symbol, colIndex) => {
@@ -43,15 +35,7 @@ export function initPacman(ctx, canvas) {
   function draw() {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
      drawMap(ctx, canvas, 40); // grid first
-    //  drawPacman(ctx, pacman);
-    // Pac-Man body
-    // ctx.fillStyle = "yellow";
-    // ctx.beginPath();
-    // ctx.arc(pacman.x, pacman.y, pacman.radius, 0.25 * Math.PI, 1.75 * Math.PI);
-    // ctx.lineTo(pacman.x, pacman.y);
-    // ctx.fill();
   }
 
   function update() {
