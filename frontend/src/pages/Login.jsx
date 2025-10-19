@@ -23,12 +23,35 @@ const handleEmailLogin = async () => {
     const res = await axios.post(`${API_BASE_URL}/login`, formData);
     if (res.status === 200) {
       login(); // update frontend auth state
+      // sweetAlertHelper.alertPopUp("Welcome Back!");
       navigate("/dashboard");
     }
   } catch (err) {
-    console.error(err);
+    if (err.response) {
+      const status = err.response.status;
+      console.error("Login Error:", status, err.response.data);
+
+      if (status >= 400 && status < 500) {
+        sweetAlertHelper.alertPopUp(
+          "Incorrect email or password"
+        );
+      } else if (status >= 500) {
+        sweetAlertHelper.alertPopUp("Server error. Please try again later.");
+      } else {
+        sweetAlertHelper.alertPopUp("Unexpected error occurred.");
+      }
+    } else if (err.request) {
+      console.error("Network Error:", err.request);
+      sweetAlertHelper.alertPopUp(
+        "Network error. Please check your connection."
+      );
+    } else {
+      console.error("Error:", err.message);
+      sweetAlertHelper.alertPopUp("Unexpected error occurred.");
+    }
   }
 };
+
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
