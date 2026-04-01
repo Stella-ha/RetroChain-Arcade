@@ -4,7 +4,7 @@ from mysql.connector import Error
 def get_connection():
     return mysql.connector.connect(
         host='localhost',
-        database='retro',
+        database='retro_arcade',
         user='root',
-        password='root@1234'
+        password='admin@123'
     )
